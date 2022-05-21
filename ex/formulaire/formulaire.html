@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+	<head>
+		
+	</head>
+	<body>
+		<div id="app">
+				<div>{{ texte }}</div>
+				<formulaire :sections="sections" v-on:envoi="afficher"></formulaire>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+		<script src="./Composants/formulaire.js"></script>
+		<script language="javascript">
+			new Vue({
+				el: '#app',
+				components:{
+					'formulaire':formulaire
+				},
+				data:{
+					texte:"",
+					sections:[
+						{
+							titre:"Identité",
+							elements:[
+								{type:"liste",titre:"Etat civil", valeurs:["Monsieur", "Madame", "Mademoiselle"]},
+								{type:"texte",titre:"Nom", hint:"Saisissez votre nom"},
+								{type:"texte",titre:"Prénom", hint:"Saisissez votre prénom"}
+							]
+						},
+						{
+							titre:"Adresse",
+							elements:[
+								{type:"texte",titre:"Numéro", hint:""},
+								{type:"texte",titre:"Rue", hint:"Nom de la rue"},
+								{type:"texte",titre:"CP", hint:"Code postal de la villle"},
+								{type:"texte",titre:"Ville", hint:"Ville"}
+							]
+						}	
+					]
+				},
+				methods:{
+					afficher:function(donnees){
+						this.texte = "Vous êtes "+donnees["Etat civil"]+" "+donnees["Prénom"]+" "+donnees["Nom"]+" et vous habitez au "+donnees["Numéro"]+", "+donnees["Rue"]+" "+donnees["CP"]+" "+donnees["Ville"];
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

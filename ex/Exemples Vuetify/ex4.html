@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+	</head>
+	<body>
+		<div id="app">
+			<v-app>
+				<v-main>
+					<v-row>
+						<v-spacer class="col-3"></v-spacer>
+						<v-layout class="col-6" column align-center justify-start>
+							<v-icon x-large color="blue">{{ icone }}</v-icon>
+							<v-select class="mt-5" label="Mes chiffres" outlined v-model="icone" :items="elements" item-text="texte" item-value="icone"></v-select>
+						</v-layout>
+					</v-row>
+				</v-main>
+			</v-app>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+		<script language="javascript">
+			new Vue({
+				el: '#app',
+				vuetify: new Vuetify(),
+				data:{
+					icone:"mdi-numeric-1-circle",
+					elements:[
+						{texte:"Un", icone:"mdi-numeric-1-circle"},
+						{texte:"Deux", icone:"mdi-numeric-2-circle"},
+						{texte:"Trois", icone:"mdi-numeric-3-circle"},
+						{texte:"Quatre", icone:"mdi-numeric-4-circle"},
+						{texte:"Cinq", icone:"mdi-numeric-5-circle"},
+						{texte:"Six", icone:"mdi-numeric-6-circle"},
+						{texte:"Sept", icone:"mdi-numeric-7-circle"},
+						{texte:"Huit", icone:"mdi-numeric-8-circle"},
+						{texte:"Neuf", icone:"mdi-numeric-9-circle"}
+					]
+				},
+			})
+		</script>
+	</body>
+</html>

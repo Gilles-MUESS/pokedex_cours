@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+	</head>
+	<body>
+		<div id="app">
+			<v-app>
+				<v-main>
+					<v-row>
+						<v-spacer class="col-3"></v-spacer>
+						<v-card class="col-6">
+							<v-card-title>
+								<v-icon>mdi-airplane</v-icon> Une image d'avion
+							</v-card-title>
+							<v-card-text>
+								<v-row>
+									<v-spacer></v-spacer>
+									<v-img src="https://cdn.radiofrance.fr/s3/cruiser-production/2020/03/4846b9fe-69d4-491a-b89b-b2a0a8da76db/1200x680_avion_gettyimages-1137268547.jpg" class="col-10"></v-img>
+									<v-spacer></v-spacer>
+								</v-row>
+							</v-card-text>
+							<v-card-actions>
+								<v-btn>OK</v-btn>
+								<v-btn>Annuler</v-btn>
+							</v-card-actions>
+						</v-card>
+					</v-row>
+				</v-main>
+			</v-app>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+		<script language="javascript">
+			new Vue({
+				el: '#app',
+				vuetify: new Vuetify(),
+				data:{
+				},
+			})
+		</script>
+	</body>
+</html>

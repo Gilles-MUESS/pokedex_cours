@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+	</head>
+	<body>
+		<div id="app">
+			<v-app>
+				<v-main>
+					<v-row>
+						<v-spacer class="col-3"></v-spacer>
+						<v-timeline class="col-6">
+							<v-timeline-item v-for="(message, index) in messages" :key="'message'+index">
+								<v-avatar size=50 slot="icon"> <!-- affichage d'une image arrondie, le slot icon vient mettre celle-ci à la place de la puce par défaut de la frise -->
+									<img src="https://img2.freepng.fr/20180327/aqw/kisspng-emoji-happiness-smiley-sticker-applause-5aba6baacf1134.5744076115221666988482.jpg"> 
+								</v-avatar>
+								<span slot="opposite"> <!-- affichage d'un élément de l'autre côté de la puce -->
+									Je suis de l'autre côté
+								</span>
+								<v-card> <!-- la propriété flat annule le relief de la carte -->
+									<v-card-title>
+										<v-icon>{{ message.icon }}</v-icon>
+										<div class="text-md-body-1 font-weight-bold blue--text">{{ message.titre }} </div>  <!-- les classes modifient le texte, cf document sur le style -->
+									<v-card-text>
+										{{ message.texte }}
+									</v-card-text>
+								</v-card>
+							</v-timeline-item>
+						</v-timeline>
+					</v-row>
+				</v-main>
+			</v-app>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+		<script language="javascript">
+			new Vue({
+				el: '#app',
+				vuetify: new Vuetify(),
+				data:{
+					messages:[
+						{icon:"mdi-account", titre:"Premier message", texte:"ifnzoinfqoiznfoqi"},
+						{icon:"mdi-airplane", titre:"Deuxième message", texte:"sfsfzfzqf"}	
+					]
+				},
+			})
+		</script>
+	</body>
+</html>
