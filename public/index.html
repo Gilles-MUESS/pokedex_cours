@@ -25,18 +25,18 @@
     <div id="app">
       <v-app>
         <v-main>
-          <v-container>
-            <select name="types" id="types" @change="getPokemonsByType">
-              <option value="all" selected>Tous les pokemons</option>
-              <option v-for="type in types" :key="type.nom">
-                {{ type.nom }}
-              </option>
-            </select>
-            <ul>
-              <li v-for="pokemon in pokemons" :key="pokemon.id">
-                {{ pokemon.nom }}
-              </li>
-            </ul>
+          <select name="types" id="types" @change="getPokemonsByType">
+            <option value="all" selected>Tous les pokemons</option>
+            <option v-for="type in types" :key="type.nom">
+              {{ type.nom }}
+            </option>
+          </select>
+          <v-container fluid class="ma-0 pa-0 d-flex flex-wrap justify-center">
+            <pokemon-card
+              v-for="pokemon in pokemons"
+              :key="pokemon.id"
+              v-bind:pokemon="pokemon"
+            ></pokemon-card>
           </v-container>
           <!--
           <v-container> 
@@ -53,10 +53,15 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script language="javascript">
+    <script language="javascript" type="module">
+      import pokemonCard from "./js/pokemon.js";
+
       // Initialisation de notre composant VueJS
       new Vue({
         el: "#app",
+        components: {
+          "pokemon-card": pokemonCard,
+        },
         vuetify: new Vuetify(),
         data: {
           pokemons: [],
