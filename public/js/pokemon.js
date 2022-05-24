@@ -1,8 +1,11 @@
-export default Vue.component("pokemon-card", {
-  props: ["pokemon"],
-  template: `
+export default Vue.component("pokemon-card", { //définition du nom du component
+  props: ["pokemon"],    //définition due la variable de travail et en-desous le template
+  // peut maitre n'importe quelles nom dans les balises ?
+  // c quoi les attributs de la v-sheet ?
+  // tr c bien pour mêtre une séparation en ligne ?
+  template: ` 
   <v-card>
-    <v-card-title class="d-flex">
+    <v-card-title class="d-flex">   
       <v-chip>{{pokemon.id}}</v-chip>
       <v-container>{{pokemon.nom}}</v-container>
     </v-card-title>

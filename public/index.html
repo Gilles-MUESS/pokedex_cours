@@ -25,12 +25,16 @@
     <div id="app">
       <v-app>
         <v-main>
+          <!-- définition du menu déroulent, qui est positionné de base sur "tous les types" -->
           <select name="types" id="types" @change="getPokemonsByType">
             <option value="all" selected>Tous les pokemons</option>
             <option v-for="type in types" :key="type.nom">
+              <!-- j'ai pas compris à quoi cela correspond -->
               {{ type.nom }}
             </option>
           </select>
+          <!-- les scripts sont en bas pour que la page s'affiche avant le chargement des scripts -->
+          <!-- il sert à quoi ce container ? -->
           <v-container fluid class="ma-0 pa-0 d-flex flex-wrap justify-center">
             <pokemon-card
               v-for="pokemon in pokemons"
@@ -56,7 +60,8 @@
     <script language="javascript" type="module">
       import pokemonCard from "./js/pokemon.js";
 
-      // Initialisation de notre composant VueJS
+      // Initialisation de notre composant VueJS <!-- récap les élèments de ci-dessous -->
+      
       new Vue({
         el: "#app",
         components: {
