@@ -25,30 +25,62 @@
     <div id="app">
       <v-app>
         <v-main>
-          <!-- définition du menu déroulent, qui est positionné de base sur "tous les types" -->
-          <select name="types" id="types" @change="getPokemonsByType">
-            <option value="all" selected>Tous les pokemons</option>
-            <option v-for="type in types" :key="type.nom">
-              <!-- j'ai pas compris à quoi cela correspond -->
-              {{ type.nom }}
-            </option>
-          </select>
+          <v-app-bar
+            :dark="darkMode"
+            flat
+            :class="'d-flex justify-space-between align-center grey' +((!darkMode)?'lighten-2':'darken-2')"
+          >
+            <!-- définition du menu déroulant, qui est positionné de base sur "tous les types" -->
+            <v-select
+              :dark="darkMode"
+              :items="types"
+              item-text="nom"
+              item-value="nom"
+              label="Type"
+              @change="getPokemonsByType"
+              return-object
+              single-line
+            ></v-select>
+            <!-- le :key est une clé d'identification -->
+            <!-- Cela est une boucle permettant de faire apparaître autant d'options que de type (v-for) -->
+            <v-switch
+              :dark="darkMode"
+              v-model="darkMode"
+              :label="darkMode ? `Thème sombre` : `Thème clair`"
+            ></v-switch>
+          </v-app-bar>
           <!-- les scripts sont en bas pour que la page s'affiche avant le chargement des scripts -->
           <!-- il sert à quoi ce container ? -->
-          <v-container fluid class="ma-0 pa-0 d-flex flex-wrap justify-center">
-            <pokemon-card
-              v-for="pokemon in pokemons"
-              :key="pokemon.id"
-              v-bind:pokemon="pokemon"
-            ></pokemon-card>
-          </v-container>
-          <!--
-          <v-container> 
-            <v-container fluid class="ma-0 pa-0 d-flex flex-wrap justify-center">
-              Affichage de tous les pokémon
+          <v-container
+            fluid
+            :class="'ma-0 pa-0 grey '+((!darkMode)?'lighten-2':'darken-2')"
+          >
+            <v-container>
+              <!-- Chaque composant pokemon-card va recevoir une prop pokemon (v-bind) qui aura pour valeur chaque pokemon itéré -->
+              <v-row class="mx-32">
+                <v-col
+                  v-for="pokemon in pokemonsAffiches"
+                  :key="pokemon.id"
+                  cols="12"
+                  lg="4"
+                  md="6"
+                  sm="12"
+                >
+                  <pokemon-card
+                    v-bind:pokemon="pokemon"
+                    v-bind:darkmode="darkMode"
+                  ></pokemon-card>
+                </v-col>
+              </v-row>
             </v-container>
+            <v-pagination
+              @input="majPage"
+              v-model="page"
+              :length="nbPages"
+              circle
+            >
+            </v-pagination>
           </v-container>
-          -->
         </v-main>
       </v-app>
     </div>
@@ -61,7 +93,7 @@
       import pokemonCard from "./js/pokemon.js";
 
       // Initialisation de notre composant VueJS <!-- récap les élèments de ci-dessous -->
-      
+
       new Vue({
         el: "#app",
         components: {
@@ -71,6 +103,11 @@
         data: {
           pokemons: [],
           types: [],
+          select: "",
+          darkMode: false,
+          pokemonsAffiches: [],
+          page: 1,
+          nbPages: 0,
         },
         created: function () {
           this.getTypes();
@@ -86,15 +123,30 @@
           getPokemons: function () {
             axios
               .get("/pokemons/all")
-              .then((result) => (this.pokemons = result.data))
+              .then((result) => {
+                this.pokemons = result.data;
+                this.pokemonsAffiches = this.pokemons.slice(0, 6);
+                this.nbPages = Math.ceil(this.pokemons.length / 6);
+              })
               .catch((error) => console.error(error.message));
           },
           getPokemonsByType: function (event) {
-            const selectedType = event.target.value;
+            const selectedType = event.nom;
+            this.page = 1;
             axios
               .get("/pokemons/" + selectedType)
-              .then((result) => (this.pokemons = result.data))
+              .then((result) => {
+                this.pokemons = result.data;
+                this.pokemonsAffiches = this.pokemons.slice(0, 6);
+                this.nbPages = Math.ceil(this.pokemons.length / 6);
+              })
               .catch((error) => console.error(error.message));
+          },
+          majPage: function (page) {
+            this.pokemonsAffiches = this.pokemons.slice(
+              (this.page - 1) * 6,
+              this.page * 6
+            );
           },
         },
       });

@@ -8,12 +8,12 @@ const port = 3030;
 let database = JSON.parse(fs.readFileSync("pokedex.json"));
 // let = déclaration de variable dans le scope dans lequel il est
 
+// Middelware pour servir les ressources publiques
+app.use(express.static("public"));
+
 // Route = chemin d'accès vers une page
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname + "/public/index.html"));
-});
-app.get("/js/pokemon.js", (req, res) => {
-  res.sendFile(path.join(__dirname + "/public/js/pokemon.js"));
 });
 
 app.get("/types", (req, res) => {
