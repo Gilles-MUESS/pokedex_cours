@@ -1,7 +1,6 @@
-git add -A -> ajouter dans la liste des fichiers à committous les fichiers modifiés
+participant :
+DIMEGLIO Mathias 
+DERIES Benoît
 
-git commit -m "Mon message" -> enregistrer en local les modifs
-
-git push -> envoyer sur le depot distant
-
-git pull -> récupérer les dernières modifs du dépot distant
+pour lancer le pokedex faire "npm start" dans le terminal 
+les fichiers "index_login.html" & "login-page.css" & "login-page.js" sont une tentative de faire des faire une page de login.
