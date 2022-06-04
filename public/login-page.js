@@ -9,7 +9,7 @@ loginButton.addEventListener("click", (e) => {
 
     //tentative de relier la page de login aux pokedexs
     if (username === "user" && password === "PokemyApp") {
-        window.open ("file:///index.html");   
+        window.open ("http://localhost:3030/%22");   
         location.reload();
     } else {
         loginErrorMsg.style.opacity = 1;
